@@ -197,16 +197,16 @@ function! s:SearchFile(hits, word)
         endif
         if l:div == 0 
             if a:hits != 0
-                let @z = @z."\n"
+                let @y = @y."\n"
             endif
             let l:div = 1
         endif
         normal! 0
         let l:lineno = '     '.l:curr_line
-        let @z = @z.'Ln '.strpart(l:lineno, strlen(l:lineno) - l:max).': '
+        let @y = @y.'Ln '.strpart(l:lineno, strlen(l:lineno) - l:max).': '
         let l:text = getline(".")
-        let @z = @z.strpart(l:text, stridx(l:text, a:word))
-        let @z = @z."\n"
+        let @y = @y.strpart(l:text, stridx(l:text, a:word))
+        let @y = @y."\n"
         normal! $
         let l:match_count = l:match_count + 1
     endwhile
@@ -315,18 +315,22 @@ function! s:ItemList()
 
 
     " get file name
-    let @z = "File:".expand("%:p")."\n\n"
+    let @z = "File:".expand("%:p")." ["
 
     " search file
     let l:index = 0
     let l:count = 0
     let l:hits = 0
+    
     while l:index < len(g:ilTokenList)
         let l:search_word = g:ilTokenList[l:index]
         let l:hits = s:SearchFile(l:hits, l:search_word)
+        let @z = @z.g:ilTokenList[l:index]." : ".l:hits." "
         let l:count = l:count + l:hits
         let l:index = l:index + 1
     endwhile
+
+    let @z = @z."]\n\n".@y
 
     " Make sure we at least have one hit.
     if l:count == 0

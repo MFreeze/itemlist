@@ -12,6 +12,5 @@ Contrary to TaskList, the opened window has fixed size by default.
 # Todo
 
 List of things to do :
-* possiblity to separate the searched token into different lists
 * print the number of list size next to window title (first line)
 
