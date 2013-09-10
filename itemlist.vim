@@ -112,7 +112,7 @@ endif
 "------------------------------------------------------------------------------
 if !exists('g:ilTokenList')
 "   default list of tokens
-    let g:ilTokenList = ["FIGURE", "ALGO"]
+    let g:ilTokenList = ["TFIGURE", "TALGO"]
 endif
 
 " Remember position
